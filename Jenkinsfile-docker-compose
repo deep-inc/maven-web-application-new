@@ -13,7 +13,7 @@ stage ('Build-Docker-Image') {
     sh "docker build -t deep1996/maven-web-application:${buildnumber} ."
 }
 stage("Docker Push") {
-withCredentials([file(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) { 
+withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) {
 sh "docker login -u deep1996 -p ${Docker_Hub_Pwd}"
 sh "docker push deep1996/maven-web-app:${buildNumber}"
 }
