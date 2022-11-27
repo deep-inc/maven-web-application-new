@@ -1,7 +1,6 @@
 node {
     def mavenHome = tool name : "maven3.8.6"
     def buildnumber = BUILD_NUMBER     
-DOCKERHUB_CREDENTIALS = credentials ('dockerpwd')
 }
 stage('CheckOut_Code') {
   git credentialsId: '4735d413-1ac8-4b65-867c-23e03607e5d1', url: 'https://github.com/deep-inc/maven-web-application-new.git'    
@@ -15,7 +14,7 @@ stage ('Build-Docker-Image') {
 }
 stage("Docker Push") {
 withCredentials([string(credentialsId: 'dockerpwd', variable: 'docker-pwd')]) {
- sh "docker login -u deep1996 -p $DOCKERHUB_CREDENTIALS --password-stdin"
+ sh "docker login -u deep1996 -p ${dockerpwd} --password-stdin"
 sh "docker push deep1996/maven-web-app:${buildNumber}"
 }
 }
