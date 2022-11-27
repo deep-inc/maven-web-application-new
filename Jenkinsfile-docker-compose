@@ -10,7 +10,7 @@ stage ('Build') {
     sh "${mavenHome}/bin/mvn clean package"
 }    
 stage ('Build-Docker-Image') {
-    sh "docker build -t deep1996/maven-web-application:${buildnumber} ."
+    sh "docker build -t deep1996/maven-web-app:${buildnumber} ."
 }
 stage("Docker Push") {
 withCredentials ([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) {
