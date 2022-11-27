@@ -14,7 +14,7 @@ stage ('Build-Docker-Image') {
 }
 stage("Docker Push") {
 withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
- sh "docker login -u deep1996 -p ${Docker_Hub_Pwd}"
+ sh "docker login -u deep1996 -p ${dockerpwd}"
 sh "docker push deep1996/maven-web-app:${buildNumber}"
 }
 }
